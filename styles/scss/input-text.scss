@@ -1,0 +1,12 @@
+.input-text {
+  &.with-own-emoji {
+    padding: 10px;
+    border: 1px solid rgb(150,150,150);
+    background: rgb(240,240,240);
+    min-height: 200px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

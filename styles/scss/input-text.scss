@@ -1,4 +1,7 @@
 .input-text {
+  white-space: pre-wrap; /* Preserves spaces and hyphens */
+  word-wrap: break-word; /* Wrap long lines */
+
   &.with-own-emoji {
     padding: 10px;
     border: 1px solid rgb(150,150,150);

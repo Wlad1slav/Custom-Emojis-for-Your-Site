@@ -1,6 +1,17 @@
-let bodyText = document.body;
+import {emojisJson} from "./loadEmojis.js";
+import {emojiTag} from "./input.js";
 
-if (bodyText.innerHTML.includes("[your_phrase]")) {
-    bodyText.innerHTML = bodyText.innerHTML.replace(/\[your_phrase\]/g,
-        `<img src="https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/AC.svg" class="svg-emoji"  alt=":australia:"/>`);
+const body = document.body;
+
+for (let i = 0; i < emojisJson.length; i++) {
+
+    if (body.textContent.includes(emojisJson[i]['shortcode'])) {
+
+        body.innerHTML = body.innerHTML.replace(
+            emojisJson[i]['shortcode'],
+            emojiTag(emojisJson[i]['path'], emojisJson[i]['alt'])
+        );
+
+    }
+
 }

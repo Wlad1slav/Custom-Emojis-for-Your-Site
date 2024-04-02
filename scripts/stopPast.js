@@ -1,6 +1,9 @@
-import {inputFields} from './inputFields.js';
+import {inputFields} from './input.js';
+
 
 for (let i = 0; i < inputFields.length; i++) {
+
+    // INSERT UNFORMATTED TEXT
     inputFields[i].addEventListener('paste', function (e) {
         // Stop the standard handling of the insert event
         e.preventDefault();
@@ -12,6 +15,7 @@ for (let i = 0; i < inputFields.length; i++) {
         document.execCommand("insertHTML", false, text);
     });
 
+    // CHECK TEXT FOR ILLEGAL TAGS
     inputFields[i].addEventListener('input', function (e) {
         const allowedTags = ['IMG']; // Tags are allowed
         const nodes = Array.from(e.target.childNodes); // Get all child nodes
@@ -25,4 +29,5 @@ for (let i = 0; i < inputFields.length; i++) {
             }
         });
     });
+
 }

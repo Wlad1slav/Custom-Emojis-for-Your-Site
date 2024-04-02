@@ -1,1 +1,0 @@
-export const inputFields = document.getElementsByClassName('with-own-emoji');

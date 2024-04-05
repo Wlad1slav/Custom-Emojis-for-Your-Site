@@ -12,7 +12,8 @@ for (let i = 0; i < inputFields.length; i++) {
                 // If there is a key phrase in the text field,
                 // it is replaced by an image
                 e.target.innerHTML = text.replace(emojisJson[emojiIndex]['shortcode'],
-                    emojiTag(emojisJson[emojiIndex]['path'], emojisJson[emojiIndex]['alt']));
+                    // emojiTag returns an emoji element, outerHTML converts it to a string
+                    emojiTag(emojisJson[emojiIndex]['path'], emojisJson[emojiIndex]['alt']).outerHTML);
 
                 moveCursor(inputFields[i]); // Move the input cursor to the end
             }

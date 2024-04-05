@@ -9,7 +9,8 @@ for (let i = 0; i < emojisJson.length; i++) {
 
         body.innerHTML = body.innerHTML.replace(
             emojisJson[i]['shortcode'],
-            emojiTag(emojisJson[i]['path'], emojisJson[i]['alt'])
+            emojiTag(emojisJson[i]['path'], emojisJson[i]['alt']).outerHTML // emojiTag returns an emoji element,
+            // outerHTML converts it to a string
         );
 
     }

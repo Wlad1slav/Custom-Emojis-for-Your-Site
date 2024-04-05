@@ -1,5 +1,11 @@
 export const inputFields = document.getElementsByClassName('with-own-emoji');
 
 export const emojiTag = (path, alt) => {
-    return `<img src="${path}" class="svg-emoji" alt="${alt}">`;
+    // Returns an emoji element
+    const emoji = document.createElement('img');
+    emoji.src = path;
+    emoji.classList.add('svg-emoji');
+    emoji.alt = alt;
+
+    return emoji;
 }

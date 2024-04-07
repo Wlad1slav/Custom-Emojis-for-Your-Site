@@ -3,7 +3,6 @@ import {EmojiTable} from "./EmojiTable.js";
 
 class CustomEmojis {
 
-    #body = document.body;
     #emojisJsonPath;
 
     constructor(emojis=null, emojisJsonPath='emojis.json') {
@@ -21,7 +20,7 @@ class CustomEmojis {
         }
 
         // Search the page for shortcodes and convert them to emojis
-        await this.bootSearchShortcodes();
+        this.searchShortcodesAtElement(null, document.body);
     }
 
     // // // // // // // // // // // // // // // // // // // // //
@@ -36,25 +35,6 @@ class CustomEmojis {
             console.log('Error loading emojis:', error);
             throw error;
         }
-    }
-
-    // // // // // // // // // // // // //
-    // BOOT: Loading on initialization  //
-    // // // // // // // // // // // // //
-    async bootSearchShortcodes() {
-        // Checks the entire page for shortcodes,
-        // if it finds shortcodes, replaces them with emojis
-
-        for (let emojiIndex in this.emojis) {
-            if (this.#body.textContent.includes(this.emojis[emojiIndex]['shortcode'])) {
-                this.#body.innerHTML = this.#body.innerHTML.replace(
-                    this.emojis[emojiIndex]['shortcode'],
-                    // emojiTag returns an emoji element, outerHTML converts it to a string
-                    this.emojiTag( this.emojis[emojiIndex]['path'],  this.emojis[emojiIndex]['alt']).outerHTML
-                );
-            }
-        }
-        
     }
 
     // // // // // // // // //
@@ -107,6 +87,23 @@ class CustomEmojis {
 
         table = table === null ? document.getElementById(tableId) : table;
         new EmojiTable(this, htmlToAddId, tableId, table)
+    }
+
+    searchShortcodesAtElement(elementId, element=null) {
+        // Checks the element for shortcodes, if it finds shortcodes, replaces them with emojis
+
+        element = element === null ? document.getElementById(elementId) : element;
+
+        for (let emojiIndex in this.emojis) {
+            if (element.textContent.includes(this.emojis[emojiIndex]['shortcode'])) {
+                element.innerHTML = element.innerHTML.replace(
+                    this.emojis[emojiIndex]['shortcode'],
+                    // emojiTag returns an emoji element, outerHTML converts it to a string
+                    this.emojiTag( this.emojis[emojiIndex]['path'],  this.emojis[emojiIndex]['alt']).outerHTML
+                );
+            }
+        }
+
     }
     
 }

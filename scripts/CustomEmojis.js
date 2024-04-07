@@ -1,32 +1,36 @@
 import {InputField} from './InputField.js';
 import {EmojiTable} from "./EmojiTable.js";
 
-function CustomEmojis(emojis=null, emojisJsonPath='emojis.json') {
+class CustomEmojis {
 
-    const body = document.body;
+    #body = document.body;
+    #emojisJsonPath;
 
-    this.emojis = emojis; // null
+    constructor(emojis=null, emojisJsonPath='emojis.json') {
+        this.emojis = emojis; // null
+        this.#emojisJsonPath = emojisJsonPath;
+    }
 
-    this.init = async () => {
+    async init() {
         // Initialization
 
         if (this.emojis === null) {
             // If an array with all emojis was not specified,
             // they are loaded from the json file
-            await computeEmojis();
+            await this.#computeEmojis();
         }
 
         // Search the page for shortcodes and convert them to emojis
-        await bootSearchShortcodes();
+        await this.bootSearchShortcodes();
     }
 
     // // // // // // // // // // // // // // // // // // // // //
     // COMPUTE: Loading of necessary information from configs   //
     // // // // // // // // // // // // // // // // // // // // //
-    const computeEmojis = async () => {
+    async #computeEmojis() {
         // Loads all emojis
         try {
-            const response = await fetch(emojisJsonPath);
+            const response = await fetch(this.#emojisJsonPath);
             this.emojis = await response.json();
         } catch (error) {
             console.log('Error loading emojis:', error);
@@ -37,13 +41,13 @@ function CustomEmojis(emojis=null, emojisJsonPath='emojis.json') {
     // // // // // // // // // // // // //
     // BOOT: Loading on initialization  //
     // // // // // // // // // // // // //
-    const bootSearchShortcodes = async () => {
+    async bootSearchShortcodes() {
         // Checks the entire page for shortcodes,
         // if it finds shortcodes, replaces them with emojis
 
         for (let emojiIndex in this.emojis) {
-            if (body.textContent.includes(this.emojis[emojiIndex]['shortcode'])) {
-                body.innerHTML = body.innerHTML.replace(
+            if (this.#body.textContent.includes(this.emojis[emojiIndex]['shortcode'])) {
+                this.#body.innerHTML = this.#body.innerHTML.replace(
                     this.emojis[emojiIndex]['shortcode'],
                     // emojiTag returns an emoji element, outerHTML converts it to a string
                     this.emojiTag( this.emojis[emojiIndex]['path'],  this.emojis[emojiIndex]['alt']).outerHTML
@@ -56,17 +60,16 @@ function CustomEmojis(emojis=null, emojisJsonPath='emojis.json') {
     // // // // // // // // //
     // Class methods to use //
     // // // // // // // // //
-    this.emojiTag = (path, alt) => {
+    emojiTag(path, alt) {
         // Returns an emoji element
         const emoji = document.createElement('img');
         emoji.src = path;
         emoji.classList.add('svg-emoji');
         emoji.alt = alt;
-
         return emoji;
     }
 
-    this.getEmoji = (shortcode) => {
+    getEmoji(shortcode) {
         // Get emoji by shortcode
         for (let i in this.emojis) {
             if (this.emojis[i]['shortcode'] === shortcode) {
@@ -75,7 +78,7 @@ function CustomEmojis(emojis=null, emojisJsonPath='emojis.json') {
         }
     }
 
-    this.createEmojiButton = (emoji, fn) => {
+    createEmojiButton(emoji, fn) {
         // Creates a clickable emoji that calls the given function
         const emojiButton = this.emojiTag(emoji['path'], emoji['alt']);
         emojiButton.classList.add('emoji-button');
@@ -83,34 +86,26 @@ function CustomEmojis(emojis=null, emojisJsonPath='emojis.json') {
         return emojiButton;
     }
 
-    this.addEmojiToHtml = (emojiShortcode, fieldId, field=null) => {
-        // Get an input field by ID and adding an emoji shortcode to it
+    addEmojiToHtml(emojiShortcode, elementId, element=null) {
+        // Adds an emoji to a specific element based on shortcode
 
-        if (field === null) {
-            field = document.getElementById(fieldId);
-        }
-        field.innerHTML += this.getEmoji(emojiShortcode).outerHTML;
+        element = element === null ? document.getElementById(elementId) : element;
+        element.innerHTML += this.getEmoji(emojiShortcode).outerHTML;
 
     }
 
-    this.addInputField = function (fieldId, field=null) {
+    addInputField(fieldId, field=null) {
         // Adds the ability to use custom emojis in a specific input field
         // The input field must have a div tag with the attribute contenteditable="true"
 
-        if (field === null) {
-            field = document.getElementById(fieldId);
-        }
-
+        field = field === null ? document.getElementById(fieldId) : field;
         new InputField(this, fieldId, field)
     }
 
-    this.addEmojiTable = function (htmlToAddId, tableId, table=null) {
+    addEmojiTable (htmlToAddId, tableId, table=null) {
         // Adds all emojis in the form of buttons to a given html object
 
-        if (table === null) {
-            table = document.getElementById(tableId);
-        }
-
+        table = table === null ? document.getElementById(tableId) : table;
         new EmojiTable(this, htmlToAddId, tableId, table)
     }
     

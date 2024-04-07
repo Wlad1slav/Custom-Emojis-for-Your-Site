@@ -2,11 +2,7 @@ export function EmojiTable(emojisObj, htmlToAddId, tableId, table=null) {
 
     // A table with all emojis in the form of buttons that add emojis to a specific html container
 
-    if (table === null) {
-        this.table = document.getElementById(tableId);
-    } else {
-        this.table = table;
-    }
+    this.table = table === null ? document.getElementById(tableId) : table;
 
     for (let emojiIndex in emojisObj.emojis) {
         // During the cycle, a button is created and added to the specified container

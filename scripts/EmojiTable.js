@@ -1,3 +1,23 @@
+/**
+ * EmojiTable - a class for creating and managing an emoji table.
+ *
+ * This class allows adding an interactive emoji table to an HTML document, where users can browse
+ * and select emojis for insertion into text fields. The table automatically populates with emojis from the CustomEmojis object,
+ * and each selected emoji can be inserted into the specified text field.
+ *
+ * Dependencies:
+ * - The class uses data and functions from CustomEmojis to display emojis.
+ *
+ * Example of use:
+ * ```
+ * const emojiObj = new CustomEmojis();
+ * emojiObj.init().then(() => {
+ *     new EmojiTable(emojiObj, 'emoji-table-container', 'editable-text-field');
+ * });
+ * ```
+ *
+ */
+
 export function EmojiTable(emojisObj, htmlToAddId, tableId, table=null) {
 
     // A table with all emojis in the form of buttons that add emojis to a specific html container

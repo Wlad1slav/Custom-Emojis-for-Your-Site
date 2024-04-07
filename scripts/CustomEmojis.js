@@ -1,5 +1,30 @@
+/**
+ * CustomEmojis - a system for managing emojis on web pages.
+ *
+ * Features:
+ * - Initialization of emojis from a JSON file or a JavaScript array specified directly
+ * - Adding event listeners to a text field that replace shortcodes directly in the text with the corresponding emojis
+ * - Creating a table with all custom emojis
+ * - Searching for emoji shortcodes in a specified HTML element and replacing them with the corresponding emojis
+ * - Creating emoji buttons that call specified functions on click
+ *
+ * Example of use:
+ * ```
+ * const emojiObj = new CustomEmojis(null, 'emojis.json');
+ * emojiObj.init().then(() => {
+ *     emojiObj.addInputField('field1');
+ *     emojiObj.addEmojiTable('field1', 'emojis-table');
+ * });
+ * ```
+ *
+ * Author: Vladyslav Fokin
+ * License: MIT
+ * GitHub: https://github.com/Wlad1slav/Custom-Emojis-for-Your-Site
+ */
+
+
 import {InputField} from './InputField.js';
-import {EmojiTable} from "./EmojiTable.js";
+import {EmojiTable} from './EmojiTable.js';
 
 class CustomEmojis {
 

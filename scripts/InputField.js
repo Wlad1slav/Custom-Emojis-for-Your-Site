@@ -1,13 +1,24 @@
+/**
+ * InputField - a class for integrating custom emojis into text fields.
+ *
+ * This class is designed to add the ability to insert emojis into text fields that have the attribute contenteditable="true".
+ * It monitors user input and replaces emoji shortcodes with corresponding images, as well as handles pasting text
+ * from the clipboard to prevent the insertion of unauthorized formatting.
+ *
+ * Dependencies:
+ * - The class uses functions from CustomEmojis for searching and replacing emojis.
+ *
+ * Example of use:
+ * ```
+ * const emojiObj = new CustomEmojis();
+ * emojiObj.init().then(() => {
+ *     new InputField(emojiObj, 'editable-text-field');
+ * });
+ * ```
+ *
+ */
+
 export class InputField {
-    /*
-    Text input field with custom emojis
-
-    The ID of the tag of the input field or the input field itself is passed
-
-    If the input field is not specified, it is searched for by id
-
-    The input field must have a div tag with the attribute contenteditable="true"
-    */
 
     #emojisObj;
     #field;

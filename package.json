@@ -1,7 +1,42 @@
 {
+  "name": "custom-emojis",
+  "version": "1.0.0",
+  "description": "Your own custom emojis for your web pages",
+  "main": "dist/custom-emojis.cjs.js",
+  "module": "dist/custom-emojis.esm.js",
+  "browser": "dist/custom-emojis.umd.js",
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "node test/spec",
+    "pretest": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wlad1slav/Custom-Emojis-for-Your-Site.git"
+  },
+  "keywords": [
+    "emojis",
+    "emoji",
+    "custom-emoji",
+    "custom-emojis"
+  ],
+  "author": "Vladyslav Fokin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Wlad1slav/Custom-Emojis-for-Your-Site/issues"
+  },
+  "homepage": "https://github.com/Wlad1slav/Custom-Emojis-for-Your-Site#readme",
   "devDependencies": {
-    "gulp": "^4.0.2",
-    "gulp-sass": "^5.1.0",
-    "sass": "^1.71.1"
-  }
+    "@babel/core": "^7.24.4",
+    "@babel/preset-env": "^7.24.4",
+    "rollup": "^2.79.1",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0"
+  },
+  "files": [
+    "dist",
+    "scripts"
+  ]
 }

@@ -23,10 +23,10 @@
  */
 
 
-import {InputField} from './InputField.js';
-import {EmojiTable} from './EmojiTable.js';
+import {InputField} from './InputField.mjs';
+import {EmojiTable} from './EmojiTable.mjs';
 
-class CustomEmojis {
+export class CustomEmojis {
 
     config = {
         emojiSize: {                        // Emoji size
@@ -146,13 +146,3 @@ class CustomEmojis {
     }
     
 }
-
-const emojiObj = new CustomEmojis({
-    emojisJsonPath: 'emojis.json',
-});
-
-emojiObj.init().then(r => {
-    // ...
-    emojiObj.addInputField('field1');
-    emojiObj.addEmojiTable('field1', 'emojis-table');
-});

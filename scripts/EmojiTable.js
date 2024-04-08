@@ -24,11 +24,11 @@ export function EmojiTable(emojisObj, htmlToAddId, tableId, table=null) {
 
     this.table = table === null ? document.getElementById(tableId) : table;
 
-    for (let emojiIndex in emojisObj.emojis) {
+    for (let emojiIndex in emojisObj.config.emojis) {
         // During the cycle, a button is created and added to the specified container
         const button = emojisObj.createEmojiButton(
-            emojisObj.emojis[emojiIndex], // An emoji that will be clickable
-            () => emojisObj.addEmojiToHtml(emojisObj.emojis[emojiIndex]['shortcode'], htmlToAddId) // Emoji action
+            emojisObj.config.emojis[emojiIndex], // An emoji that will be clickable
+            () => emojisObj.addEmojiToHtml(emojisObj.config.emojis[emojiIndex]['shortcode'], htmlToAddId) // Emoji action
         );
 
         this.table.appendChild(button);

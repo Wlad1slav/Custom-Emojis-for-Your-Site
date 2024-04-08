@@ -28,24 +28,34 @@ import {EmojiTable} from './EmojiTable.js';
 
 class CustomEmojis {
 
-    #emojisJsonPath;
+    config = {
+        emojiSize: {                        // Emoji size
+            width: 'auto',
+            height: '24px',
+            maxWidth: '30px',
+        },
+        autoSearchShortcodes: true,         // Automatic search for shortcodes on the body of the page
+        emojis: null,                       // The emojis that will be used
+        emojisJsonPath: 'emojis.json',      // Json file from which to download emojis
+    };
 
-    constructor(emojis=null, emojisJsonPath='emojis.json') {
-        this.emojis = emojis; // null
-        this.#emojisJsonPath = emojisJsonPath;
+    constructor(config=null) {
+        config !== null ? Object.assign(this.config, config) : null;
     }
 
     async init() {
         // Initialization
 
-        if (this.emojis === null) {
+        if (this.config.emojis === null) {
             // If an array with all emojis was not specified,
             // they are loaded from the json file
             await this.#computeEmojis();
         }
 
-        // Search the page for shortcodes and convert them to emojis
-        this.searchShortcodesAtElement(null, document.body);
+        if (this.config.autoSearchShortcodes) {
+            // Search the page for shortcodes and convert them to emojis
+            this.searchShortcodesAtElement(null, document.body);
+        }
     }
 
     // // // // // // // // // // // // // // // // // // // // //
@@ -54,8 +64,8 @@ class CustomEmojis {
     async #computeEmojis() {
         // Loads all emojis
         try {
-            const response = await fetch(this.#emojisJsonPath);
-            this.emojis = await response.json();
+            const response = await fetch(this.config.emojisJsonPath);
+            this.config.emojis = await response.json();
         } catch (error) {
             console.log('Error loading emojis:', error);
             throw error;
@@ -71,14 +81,18 @@ class CustomEmojis {
         emoji.src = path;
         emoji.classList.add('svg-emoji');
         emoji.alt = alt;
+        emoji.loading = 'lazy'; // Enable native lazy loading
+        emoji.style.width = this.config.emojiSize.width ? this.config.emojiSize.width : 'auto';
+        emoji.style.height = this.config.emojiSize.height ? this.config.emojiSize.height : 'auto';
+        emoji.style.maxWidth = this.config.emojiSize.maxWidth ? this.config.emojiSize.maxWidth : 'auto';
         return emoji;
     }
 
     getEmoji(shortcode) {
         // Get emoji by shortcode
-        for (let i in this.emojis) {
-            if (this.emojis[i]['shortcode'] === shortcode) {
-                return this.emojiTag(this.emojis[i]['path'], this.emojis[i]['alt']);
+        for (let i in this.config.emojis) {
+            if (this.config.emojis[i]['shortcode'] === shortcode) {
+                return this.emojiTag(this.config.emojis[i]['path'], this.config.emojis[i]['alt']);
             }
         }
     }
@@ -119,12 +133,12 @@ class CustomEmojis {
 
         element = element === null ? document.getElementById(elementId) : element;
 
-        for (let emojiIndex in this.emojis) {
-            if (element.textContent.includes(this.emojis[emojiIndex]['shortcode'])) {
+        for (let emojiIndex in this.config.emojis) {
+            if (element.textContent.includes(this.config.emojis[emojiIndex]['shortcode'])) {
                 element.innerHTML = element.innerHTML.replace(
-                    this.emojis[emojiIndex]['shortcode'],
+                    new RegExp(this.config.emojis[emojiIndex]['shortcode'], 'g'),
                     // emojiTag returns an emoji element, outerHTML converts it to a string
-                    this.emojiTag( this.emojis[emojiIndex]['path'],  this.emojis[emojiIndex]['alt']).outerHTML
+                    this.emojiTag( this.config.emojis[emojiIndex]['path'], this.config.emojis[emojiIndex]['alt']).outerHTML
                 );
             }
         }
@@ -133,11 +147,12 @@ class CustomEmojis {
     
 }
 
-const emojiObj = new CustomEmojis(null, 'emojis.json');
+const emojiObj = new CustomEmojis({
+    emojisJsonPath: 'emojis.json',
+});
 
 emojiObj.init().then(r => {
     // ...
-    console.log(emojiObj.emojis);
     emojiObj.addInputField('field1');
     emojiObj.addEmojiTable('field1', 'emojis-table');
 });

@@ -11,8 +11,8 @@
 
 h1 {
   .svg-emoji {
-    width: $font-size-heading1*1.3;
-    height: $font-size-heading1*1.3;
+    max-width: $font-size-heading1*1.3 !important;
+    height: $font-size-heading1*1.3 !important;
     margin: 0 round($font-size/2.5);
     vertical-align: middle;
   }
@@ -20,8 +20,8 @@ h1 {
 
 h2 {
   .svg-emoji {
-    width: $font-size-heading2*1.3;
-    height: $font-size-heading2*1.3;
+    width: $font-size-heading2*1.3 !important;
+    height: $font-size-heading2*1.3 !important;
     margin: 0 5px;
     vertical-align: middle;
   }
@@ -29,8 +29,8 @@ h2 {
 
 h3 {
   .svg-emoji {
-    width: $font-size-heading3*1.3;
-    height: $font-size-heading3*1.3;
+    width: $font-size-heading3*1.3 !important;
+    height: $font-size-heading3*1.3 !important;
     margin: 0 5px;
     vertical-align: middle;
   }

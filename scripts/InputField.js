@@ -41,13 +41,13 @@ export class InputField {
     #handleInput(e) {
         let text = e.target.innerHTML;
 
-        for (let emojiIndex in this.#emojisObj.emojis) {
-            if (text.includes(this.#emojisObj.emojis[emojiIndex]['shortcode'])) {
+        for (let emojiIndex in this.#emojisObj.config.emojis) {
+            if (text.includes(this.#emojisObj.config.emojis[emojiIndex]['shortcode'])) {
                 // If there is a key phrase in the text field,
                 // it is replaced by an image
-                e.target.innerHTML = text.replace(this.#emojisObj.emojis[emojiIndex]['shortcode'],
+                e.target.innerHTML = text.replace(this.#emojisObj.config.emojis[emojiIndex]['shortcode'],
                     // emojiTag returns an emoji element, outerHTML converts it to a string
-                    this.#emojisObj.emojiTag(this.#emojisObj.emojis[emojiIndex]['path'], this.#emojisObj.emojis[emojiIndex]['alt']).outerHTML);
+                    this.#emojisObj.emojiTag(this.#emojisObj.config.emojis[emojiIndex]['path'], this.#emojisObj.config.emojis[emojiIndex]['alt']).outerHTML);
 
                 this.#moveCursorToEnd(); // Move the input cursor to the end
             }

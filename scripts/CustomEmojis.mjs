@@ -8,9 +8,16 @@
  * - Searching for emoji shortcodes in a specified HTML element and replacing them with the corresponding emojis
  * - Creating emoji buttons that call specified functions on click
  *
- * Example of use:
- * ```
- * const emojiObj = new CustomEmojis(null, 'emojis.json');
+ * Example of use: ```
+ * const emojiObj = new CustomEmojis({
+ *     emojis: [
+ *         {
+ *             shortcode: "/smile/",
+ *             path: "https://example.com/smile.webp",
+ *             alt: "\uD83D\uDE0A"
+ *         }],
+ *     autoSearchShortcodes: true
+ * });
  * emojiObj.init().then(() => {
  *     emojiObj.addInputField('field1');
  *     emojiObj.addEmojiTable('field1', 'emojis-table');
@@ -20,6 +27,7 @@
  * Author: Vladyslav Fokin
  * License: MIT
  * GitHub: https://github.com/Wlad1slav/Custom-Emojis-for-Your-Site
+ * Documentation: https://github.com/Wlad1slav/Custom-Emojis-for-Your-Site?tab=readme-ov-file#documentation
  */
 
 

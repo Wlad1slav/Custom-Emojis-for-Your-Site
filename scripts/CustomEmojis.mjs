@@ -1,12 +1,10 @@
 /**
- * CustomEmojis - a system for managing emojis on web pages.
+ * CustomEmojis is a dynamic library designed to manage and integrate custom emojis within web pages effortlessly.
  *
  * Features:
- * - Initialization of emojis from a JSON file or a JavaScript array specified directly
- * - Adding event listeners to a text field that replace shortcodes directly in the text with the corresponding emojis
- * - Creating a table with all custom emojis
- * - Searching for emoji shortcodes in a specified HTML element and replacing them with the corresponding emojis
- * - Creating emoji buttons that call specified functions on click
+ * - Dynamic Emoji Conversion: Automatically convert specified shortcodes into images within the text, enriching user experience with visual elements.
+ * - Flexible Emoji Definition: Define your custom emojis directly in JavaScript or through an external JSON file, allowing for easy updates and management.
+ * - Interactive Elements: Create emoji tables and clickable emoji buttons, enabling users to interact with emojis directly on your web page.
  *
  * Example of use: ```
  * const emojiObj = new CustomEmojis({

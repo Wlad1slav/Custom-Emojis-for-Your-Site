@@ -1,12 +1,19 @@
 # Custom Emojis for Your Website
-CustomEmojis - a system for managing emojis on web pages. The essence of the library is to provide an opportunity to dynamically convert shortcodes _(For example: /smile/)_ into small images directly in the text, including the input field. You can specify emojis very conveniently: either directly in HTML/JS when declaring a class, or by setting the path to a Json file with all your emojis in the settings. And replace shortcodes with emojis in certain HTML elements specified by you and dynamically in certain text input fields.
+CustomEmojis is a dynamic library designed to manage and integrate custom emojis within web pages effortlessly. It allows for the conversion of specified shortcodes (e.g., /smile/) into images directly within text content, including input fields. This library supports [defining emojis](https://github.com/Wlad1slav/Custom-Emojis-for-Your-Site?tab=readme-ov-file#create-own-emoji) through JavaScript or external JSON files, offering flexibility in customization and integration.
 - Version: `1.0.0`
 - License: MIT
 
-## Install
-`npm i custom-emojis`
-### Use Example
+## Features
+- **Dynamic Emoji Conversion:** Automatically convert specified shortcodes into images within the text, enriching user experience with visual elements.
+- **Flexible Emoji Definition:** Define your custom emojis directly in JavaScript or through an external JSON file, allowing for easy updates and management.
+- **Interactive Elements:** Create emoji tables and clickable emoji buttons, enabling users to interact with emojis directly on your web page.
 
+## Install
+- Before you begin, ensure you have Node.js installed on your system. This library requires Node.js version **12.x** or higher due to its use of ECMAScript modules. If you're unsure about your Node.js version, you can check it by running `node -v` in your terminal.
+- To install CustomEmojis, use the following command in your project's root directory:
+`npm i custom-emojis`
+
+### Use Example
 ```html
 <script type="module">
     // The path where you have the CustomEmojis.mjs file
@@ -31,43 +38,25 @@ CustomEmojis - a system for managing emojis on web pages. The essence of the lib
 </script>
 ```
 
-## Features:
-- Initialization of emojis from a JSON file or a JavaScript array specified directly
-- Adding event listeners to a text field that replace shortcodes directly in the text with the corresponding emojis
-- Creating a table with all custom emojis
-- Searching for emoji shortcodes in a specified HTML element and replacing them with the corresponding emojis
-- Creating emoji buttons that call specified functions on click
-
 ## Documentation
 ### Get Started
-First, you need to import the `CustomEmojis` class into your JavaScript code. Be careful, you can import files this way only inside modules.
+To use **CustomEmojis**, first, import it into your module:
 ```html
 <script type="module">
     // The path where you have the CustomEmojis.mjs file
     import {CustomEmojis} from "./node_modules/custom-emojis/scripts/CustomEmojis.mjs";
 </script>
 ```
-Next, create an instance of the `CustomEmojis` class.
+Create an instance of `CustomEmojis` and initialize it:
 ```html
 <script type="module">
-    // The path where you have the CustomEmojis.mjs file
-    import {CustomEmojis} from "./node_modules/custom-emojis/scripts/CustomEmojis.mjs";
-    const emojiObj = new CustomEmojis({
-        // yr settings
-    });
-</script>
-```
-After creating a class, it must be initialized using the `init()` method. Since the initialization is performed through an asynchronous method, then the code directly related to `CustomEmojis` should be written inside the `then` method.
-```html
-<script type="module">
-    // The path where you have the CustomEmojis.mjs file
-    import {CustomEmojis} from "./node_modules/custom-emojis/scripts/CustomEmojis.mjs";
-    const emojiObj = new CustomEmojis({
-        // yr settings
-    });
-    emojiObj.init().then(() => {
-        // ...
-    });
+  const emojiObj = new CustomEmojis({
+    // Configuration options here
+  });
+  
+  emojiObj.init().then(() => {
+    // Your code after initialization
+  });
 </script>
 ```
 
@@ -100,7 +89,6 @@ Alternatively, you can specify a path to a JSON file that contains an array of e
     "path": "https://example.com/smile.webp",
     "alt": "smiling face"
   }
-  // Add more emojis as needed
 ]
 ```
 To use this JSON file for configuration, set the `emojisJsonPath` property in your `CustomEmojis` constructor:

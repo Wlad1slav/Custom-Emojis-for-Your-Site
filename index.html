@@ -3,28 +3,45 @@
 <head>
     <title>Own Emoji for Your Site</title>
 
-    <link rel="stylesheet" href="styles/css/style.css">
-    <link rel="stylesheet" href="styles/css/typography.css">
-    <link rel="stylesheet" href="styles/css/input-text.css">
-    <link rel="stylesheet" href="styles/css/emoji.css">
-    <link rel="stylesheet" href="styles/css/emojis-table.css">
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
 
-    <h1>Own Emoji for Your Site</h1>
+    <h1>Custom Emojis /uwu/ for Your Webpages !</h1>
 
-    <p>UwU /femboy/ OwO</p>
+    <nav>
+        <a href="https://github.com/Wlad1slav/Custom-Emojis-for-Your-Site">GitHub</a>
+        <a href="https://github.com/Wlad1slav/Custom-Emojis-for-Your-Site?tab=readme-ov-file#documentation">Documentation</a>
+        <a href="https://github.com/Wlad1slav/Custom-Emojis-for-Your-Site?tab=readme-ov-file#documentation">Get Started</a>
+    </nav>
 
-    <h2>Input text with your own emoji pack</h2>
+    <h2>Input Field</h2>
+    <p class="notify">Here you can enter any text using emojis (e.g. / uwu /)</p>
     
-    <div contenteditable="true" class="input-text with-own-emoji" id="field1"></div>
+    <div contenteditable="true" class="input-field" id="field1">
+        can i hug you /hug/
+    </div>
 
-    <div id="emojis-table">
+    <div id="emojisTable">
         <!-- Here emojis are generated automatically -->
     </div>
 
-    <script type="module" src="scripts/CustomEmojis.mjs"></script>
+    <h2 style="margin-top: 20px;">How to do also like here?</h2>
+    <p>You can quickly and easily create your own set of emojis and easily add them to your site. <a href="https://github.com/Wlad1slav/Custom-Emojis-for-Your-Site">More here.</a></p>
 
 </body>
+
+<script type="module">
+    import {CustomEmojis} from "./scripts/CustomEmojis.mjs";
+
+    const emojiObj = new CustomEmojis({
+        emojisJsonPath: 'emojis/config.json'
+    });
+    emojiObj.init().then(r => {
+        emojiObj.addInputField('field1');
+        emojiObj.addEmojiTable('field1', 'emojisTable');
+    });
+
+</script>
 
 </html>
